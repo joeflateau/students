@@ -9,11 +9,10 @@ if id -u $name >/dev/null 2>&1; then
 else
 	sudo useradd -m -d $home -p $pass $name
 	sudo usermod -g students $name
-	sudo mkdir -p "$home/chroot/www"
-	sudo chown root.root $home
-	sudo chown root.root "$home/chroot"
-	sudo chmod 755 $home
-	sudo chmod 755 "$home/chroot"
-	sudo chown "$name.$name" "$home/chroot/www"
-	sudo ln -s "$home/chroot/www/" "/var/www/students.joeflateau.net/$name"
+	sudo mkdir -p "$home"
 fi
+
+sudo usermod -s /bin/bash -g students $name
+sudo chown $name.$name $home
+sudo chmod 700 $home
+
